@@ -83,10 +83,11 @@ const tomarTurno = () => {
         tomarTurno();
     }else if (pacienteBusqueda == "A"){
         let dniPacienteBusqueda = parseInt(prompt("Ingrese el dni del paciente a asignar turno : "));
-
-        let arrayNuevo = listadePacientes.filter(Paciente => Paciente.dni != pacienteRetiro);
+        
+    }else if (pacienteBusqueda == "N"){
+        agregarPaciente();
     }
-    let arrayNuevo = listadePacientes.filter(Paciente => Paciente.dni != pacienteBusqueda);
+    
 }
 
 
