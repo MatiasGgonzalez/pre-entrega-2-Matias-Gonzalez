@@ -84,7 +84,7 @@ const tomarTurno = () => {
             let turnoNuevo = prompt("Ingrese el tipo de turno a asignar : (Ej : Traumatologia)");
             pacienteTurnoNuevo[0].tipoTurno = turnoNuevo;
             console.log(pacienteTurnoNuevo[0].tipoTurno);
-            console.log("Turno agregado con exito")
+            alert("Turno agregado con exito");
             menu();
         }else if(pacienteBusqueda == "N"){
             agregarPaciente();
@@ -102,6 +102,8 @@ const buscarPaciente = () => {
     if (resultadoPaciente == true){
         let muestraPaciente = listadePacientes.filter(Paciente => Paciente.dni == pacienteBuscado);
         console.log(muestraPaciente);
+        alert("Se muestra paciente en consola")
+        menu();
     }else{
         alert("El paciente no esta en la base de datos, vuelva a intentarlo");
         buscarPaciente();
