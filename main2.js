@@ -65,51 +65,55 @@ const verPacientes = () => {
     alert("Se muestran pacientes en consola")
     console.log(listadePacientes)
     for(const pacienteIterado of listadePacientes){
-        console.log("SE MUESRA A LOS PACIENTES EN CONSOLA")
         console.log(pacienteIterado) 
     }
     menu();
-    alert(`${pacienteIterado}`)
-    
 }
 
 
 const tomarTurno = () => {
     let pacienteBusqueda = (prompt("Ingrese la opcion que desea a continuacion : Designar turno a un paciente ya existente (A). Agregar turno a paciente nuevo : (N)"));
-
     pacienteBusqueda = pacienteBusqueda.toUpperCase();
-    if (pacienteBusqueda != "A" || pacienteBusqueda != "B"){
+    if(pacienteBusqueda == "A" || pacienteBusqueda== "N" ){
+        if (pacienteBusqueda == "A"){
+            let dniPacienteBusqueda = parseInt(prompt("Ingrese el dni del paciente a asignar turno : "));
+            let pacienteTurnoNuevo = listadePacientes.filter(Paciente => Paciente.dni == dniPacienteBusqueda);
+            console.log("---------------------------")
+            console.log(pacienteTurnoNuevo);
+            console.log(pacienteTurnoNuevo[0].tipoTurno);
+            let turnoNuevo = prompt("Ingrese el tipo de turno a asignar : (Ej : Traumatologia)");
+            pacienteTurnoNuevo[0].tipoTurno = turnoNuevo;
+            console.log(pacienteTurnoNuevo[0].tipoTurno);
+            console.log("Turno agregado con exito")
+            menu();
+        }else if(pacienteBusqueda == "N"){
+            agregarPaciente();
+        }
+    }else{
         alert("Ingreso un dato incorrecto, intente nuevamente");
         tomarTurno();
-    }else if (pacienteBusqueda == "A"){
-        let dniPacienteBusqueda = parseInt(prompt("Ingrese el dni del paciente a asignar turno : "));
-        
-    }else if (pacienteBusqueda == "N"){
-        agregarPaciente();
     }
-    
+     
 }
 
-
-    /*
-    let pacienteRetiro = prompt("Ingrese el paciente a retirar : ").toUpperCase();
-    console.log(pacienteRetiro);
-    console.log(listadePacientes.join("-"))
-    console.log(listadePacientes.includes(pacienteRetiro));
-    posicionElemento = listadePacientes.indexOf(pacienteRetiro);
-    console.log(posicionElemento);
-    menu();
-    return listadePacientes;
-    */
-
-
+const buscarPaciente = () => {
+    let pacienteBuscado = parseInt(prompt("Ingrese el dni del paciente a buscar : "));
+    let resultadoPaciente = listadePacientes.some(Paciente => Paciente.dni == pacienteBuscado);
+    if (resultadoPaciente == true){
+        let muestraPaciente = listadePacientes.filter(Paciente => Paciente.dni == pacienteBuscado);
+        console.log(muestraPaciente);
+    }else{
+        alert("El paciente no esta en la base de datos, vuelva a intentarlo");
+        buscarPaciente();
+    }
+}
 
 
 
 function menu(){
-    let opcionMenu = prompt("Ingrese la opcion que desea a continuacion : Ingresar paciente (I) Retirar paciente(R) Ver pacientes (V) Salir(S)");
+    let opcionMenu = prompt("Ingrese la opcion que desea a continuacion : Ingresar paciente (I) Retirar paciente(R) Ver pacientes (V) Salir(S) Buscar Paciente (B) Tomar un turno (T)");
     opcionMenu = opcionMenu.toUpperCase();
-    if(opcionMenu == "I" || opcionMenu == "R" || opcionMenu == "V"){
+    if(opcionMenu == "I" || opcionMenu == "R" || opcionMenu == "V" || opcionMenu == "B" || opcionMenu == "T"){
         if (opcionMenu == "I"){
             agregarPaciente();
         }else if (opcionMenu == "R"){
@@ -117,42 +121,16 @@ function menu(){
     
         }else if (opcionMenu == "V"){
             verPacientes();
+        }else if(opcionMenu == "B"){
+            buscarPaciente();
+        }else if(opcionMenu == "T"){
+            tomarTurno();
         }
     }else{
         alert("Usted ingreso mal la opcion, vuelva a intentarlo");
         menu();
     }
      
-
-
 }
     
 menu();
-
-/*
-const paciente1 = new Paciente("jose gonzalez", 17312974, "5/5/1997", "gonzalezzmati@gmail.com");
-
-console.log(paciente1);
-
-
-function ingresarPaciente(){
-    cantidadPacientes = cantidadPacientes + 1;
-    tiempoEsperaTotal = cantidadPacientes * tiempoEspera;
-    nombrePaciente = prompt("Ingrese el nombre completo del paciente : ")
-    dniPaciente = prompt("Ingrese el dni del paciente : ");
-    fechaNacimientoPaciente = prompt("Ingrese la fecha de nacimiento  del paciente. Ej = (5/5/1997): ");
-    mailPaciente = prompt("Ingrese el mail del paciente : ");
-    alert(`El paciente ${nombrePaciente} tiene ${tiempoEsperaTotal} minutos de espera. Cantidad de pacientes en el consultorio : ${cantidadPacientes}`);
-    alert(`Paciente ingresado con exito`);
-}
-
-ingresarPaciente();
-
-function retirarPaciente(){
-    
-}
-
-function verPacientes(){
-
-}
-*/
