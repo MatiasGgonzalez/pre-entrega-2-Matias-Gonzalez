@@ -5,6 +5,7 @@ const paciente = {
     mail : "gonzalezzmati@gmail.com",
     tipoTurno : "Traumatologia",
     profesional  : "Martin Rodrigo",
+    hora : "15",
     tiempoEspera : 5,
     cantidadPacientes : 0 
 }
@@ -14,7 +15,7 @@ let capacidad = 10;
 
 
 class Paciente {
-    constructor(nombreCompleto,dni,fechaNacimiento,mail,tipoTurno,profesional,tiempoEspera,cantidadPacientes){
+    constructor(nombreCompleto,dni,fechaNacimiento,mail,tipoTurno,profesional,hora,tiempoEspera,cantidadPacientes){
         this.nombreCompleto = nombreCompleto;
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
@@ -23,29 +24,32 @@ class Paciente {
         this.profesional = profesional;
         this.tiempoEspera = tiempoEspera;
         this.cantidadPacientes = cantidadPacientes;
+        this.hora = hora;
     }
 }
 
 let listadePacientes = [];
 
+
 const agregarPaciente = () =>{
     let cantidadPacientes = 0;
     cantidadPacientes = cantidadPacientes + 1;
     let nombreCompleto = prompt("indique el nombre completo del paciente :").toUpperCase();
-    let dni= prompt("Indique el dni del paciente :")
+    let dni= prompt("Indique el dni del paciente (sin puntos ni espacios):")
+    let cantNumerosDni = dni.length;
     let fechaNacimiento = prompt("Indique la fecha de nacimiento del paciente. Ej : (5/5/1997) : ")
     let mail = prompt("Indique el mail del paciente : ")
     let tipoTurno = prompt("Indique la especialidad para la que desea el turno. Ej (Traumatologo) : ")
     let profesional = prompt("Indique el profesional con el que desea el turno : ")
+    let hora = prompt("Ingrese el horario en el que desea el turno (Formato 24 hs) : ")
     let tiempoEspera = 5;
     tiempoEspera =  cantidadPacientes * tiempoEspera;
-    let pacienteNuevo = new Paciente(nombreCompleto,dni,fechaNacimiento,mail,tipoTurno,profesional,tiempoEspera,cantidadPacientes);
+    let pacienteNuevo = new Paciente(nombreCompleto,dni,fechaNacimiento,mail,tipoTurno,profesional,hora,tiempoEspera,cantidadPacientes);
     listadePacientes.push(pacienteNuevo);
     console.log(listadePacientes);
     alert("Paciente Agregado con exito.")
     menu();
     return listadePacientes;
-    
 }
 
 const retirarPaciente = () =>{
@@ -81,9 +85,13 @@ const tomarTurno = () => {
             console.log("---------------------------")
             console.log(pacienteTurnoNuevo);
             console.log(pacienteTurnoNuevo[0].tipoTurno);
-            let turnoNuevo = prompt("Ingrese el tipo de turno a asignar : (Ej : Traumatologia)");
+            let turnoNuevo = prompt("Ingrese la especialidad  del turno a asignar : (Ej : Traumatologia)");
             pacienteTurnoNuevo[0].tipoTurno = turnoNuevo;
             console.log(pacienteTurnoNuevo[0].tipoTurno);
+            let profesionaNuevo = prompt("Ingrese el profesional con el que desea el turno : ")
+            pacienteTurnoNuevo[0].profesional = profesionaNuevo;
+            let horaNueva = prompt("Ingrese el horario del turno : ")
+            pacienteTurnoNuevo[0].hora = horaNueva;
             alert("Turno agregado con exito");
             menu();
         }else if(pacienteBusqueda == "N"){
@@ -102,6 +110,7 @@ const buscarPaciente = () => {
     if (resultadoPaciente == true){
         let muestraPaciente = listadePacientes.filter(Paciente => Paciente.dni == pacienteBuscado);
         console.log(muestraPaciente);
+        alert(`Paciente : ${muestraPaciente[0].nombreCompleto}- Dni : ${muestraPaciente[0].dni}- Fecha de nacimiento :${muestraPaciente[0].fechaNacimiento}- Email : ${muestraPaciente[0].mail}- Especialidad : ${muestraPaciente[0].tipoTurno}- Profesional : ${muestraPaciente[0].profesional}- Hora : ${muestraPaciente[0].hora}`)
         alert("Se muestra paciente en consola")
         menu();
     }else{
@@ -110,12 +119,25 @@ const buscarPaciente = () => {
     }
 }
 
+const cancelarTurno = () => {
+    let dniPacienteACancelar = prompt("Ingrese el dni del paciente a cancelar turno : ")
+    let pacienteACancelar = listadePacientes.filter(Paciente => Paciente.dni == dniPacienteACancelar);
+    alert(`El paciente ${pacienteACancelar[0].nombreCompleto} tiene turno  en ${pacienteACancelar[0].tipoTurno} con el profesional ${pacienteACancelar[0].profesional}`)
+    pacienteACancelar[0].tipoTurno = "";
+    pacienteACancelar[0].profesional = "";
+    pacienteACancelar[0].hora = "";
+    alert("Su turno se cancelo con exito")
+    alert(pacienteACancelar[0].tipoTurno)
+    console.log(pacienteACancelar[0].tipoTurno);
+    menu();
+}
+
 
 
 function menu(){
-    let opcionMenu = prompt("Ingrese la opcion que desea a continuacion : Ingresar paciente (I) Retirar paciente(R) Ver pacientes (V) Salir(S) Buscar Paciente (B) Tomar un turno (T)");
+    let opcionMenu = prompt("Ingrese la opcion que desea a continuacion : Ingresar paciente (I) Retirar paciente(R) Ver pacientes (V) Salir(S) Buscar Paciente (B) Tomar un turno (T) Cancelar turno(C)");
     opcionMenu = opcionMenu.toUpperCase();
-    if(opcionMenu == "I" || opcionMenu == "R" || opcionMenu == "V" || opcionMenu == "B" || opcionMenu == "T"){
+    if(opcionMenu == "I" || opcionMenu == "R" || opcionMenu == "V" || opcionMenu == "B" || opcionMenu == "T" || opcionMenu == "C"){
         if (opcionMenu == "I"){
             agregarPaciente();
         }else if (opcionMenu == "R"){
@@ -127,6 +149,8 @@ function menu(){
             buscarPaciente();
         }else if(opcionMenu == "T"){
             tomarTurno();
+        }else if(opcionMenu == "C"){
+            cancelarTurno();
         }
     }else{
         alert("Usted ingreso mal la opcion, vuelva a intentarlo");
