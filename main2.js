@@ -30,40 +30,78 @@ class Paciente {
 
 let listadePacientes = [];
 
+let listadePacientesJson = [];
 
-const agregarPaciente = () =>{
+console.log(listadePacientesJson);
+
+const agregarPaciente = (e) =>{
     let cantidadPacientes = 0;
     cantidadPacientes = cantidadPacientes + 1;
-    let nombreCompleto = prompt("indique el nombre completo del paciente :").toUpperCase();
-    let dni= prompt("Indique el dni del paciente (sin puntos ni espacios):")
-    let cantNumerosDni = dni.length;
-    let fechaNacimiento = prompt("Indique la fecha de nacimiento del paciente. Ej : (5/5/1997) : ")
-    let mail = prompt("Indique el mail del paciente : ")
-    let tipoTurno = prompt("Indique la especialidad para la que desea el turno. Ej (Traumatologo) : ")
-    let profesional = prompt("Indique el profesional con el que desea el turno : ")
-    let hora = prompt("Ingrese el horario en el que desea el turno (Formato 24 hs) : ")
+    e.preventDefault();
+
+    let formulario = e.target;
+    let nombreCompleto = formulario.children[1].value;
+    localStorage.setItem(`nombreCompleto`,nombreCompleto);
+    console.log(nombreCompleto);
+    let dni= formulario.children[3].value;
+    localStorage.setItem(`dni`, dni);
+    console.log(dni);
+
+    let fechaNacimiento = formulario.children[5].value;
+    localStorage.setItem(`fechaNacimiento`, fechaNacimiento);
+    console.log(fechaNacimiento);
+    let mail = formulario.children[7].value;
+    localStorage.setItem(`fmail`, mail);
+    console.log(mail);
+    let tipoTurno = formulario.children[9].value;
+    localStorage.setItem(`tipoTurno`, tipoTurno);
+    
+    console.log(tipoTurno);
+    let profesional = formulario.children[11].value;
+    localStorage.setItem(`profesional`, profesional);
+    console.log(profesional);
+    let hora = formulario.children[13].value;
+    localStorage.setItem(`hora`, hora);
+    console.log(hora);
     let tiempoEspera = 5;
     tiempoEspera =  cantidadPacientes * tiempoEspera;
     let pacienteNuevo = new Paciente(nombreCompleto,dni,fechaNacimiento,mail,tipoTurno,profesional,hora,tiempoEspera,cantidadPacientes);
     listadePacientes.push(pacienteNuevo);
     console.log(listadePacientes);
     alert("Paciente Agregado con exito.")
-    menu();
-    return listadePacientes;
+    listadePacientesJson = JSON.stringify(listadePacientes)
+    console.log("MUESTRA EN CONSOLA DE ARRAY DE OBJETO CON JSON")
+    console.log(listadePacientesJson)
+    localStorage.setItem("Lista de pacientes", listadePacientesJson);
+    return listadePacientesJson;
 }
 
-const retirarPaciente = () =>{
-    let pacienteRetiro = parseInt(prompt("Ingrese el dni del paciente a retirar : "));
+let miFormulario = document.getElementById("formulario__ingresar__paciente");
+miFormulario.addEventListener("submit", agregarPaciente);
+
+
+
+
+
+const retirarPaciente = (e) =>{
+    e.preventDefault();
+    let formularioRetiro = e.target;
+    let pacienteRetiro = formularioRetiro[0].value;
+    console.log("Paciente a retirar : ")
+    console.log(pacienteRetiro)
     let arrayNuevo = listadePacientes.filter(Paciente => Paciente.dni != pacienteRetiro);
     alert("Paciente retirado con exito")
     console.log("IMPRIMIMOS EL ARRAY SIN EL DATO")
     console.log(arrayNuevo);
-    console.log(arrayNuevo[0][1])
     listadePacientes = arrayNuevo;
+    listadePacientesJson = JSON.stringify(listadePacientes)
     console.log(listadePacientes)
-    menu();
-    return listadePacientes;
+    return listadePacientesJson;
+
 }
+
+let retiroPaciente = document.getElementById("formulario__retiro__paciente");
+retiroPaciente.addEventListener("submit", retirarPaciente);
 
 const verPacientes = () => {
     alert("Se muestran pacientes en consola")
@@ -71,12 +109,13 @@ const verPacientes = () => {
     for(const pacienteIterado of listadePacientes){
         console.log(pacienteIterado) 
     }
-    menu();
 }
 
 
-const tomarTurno = () => {
-    let pacienteBusqueda = (prompt("Ingrese la opcion que desea a continuacion : Designar turno a un paciente ya existente (A). Agregar turno a paciente nuevo : (N)"));
+const tomarTurno = (e) => {
+    e.preventDefault();
+    let tomarturnoNuevo = e.target;
+    let pacienteBusqueda = tomarturnoNuevo[0].value;
     pacienteBusqueda = pacienteBusqueda.toUpperCase();
     if(pacienteBusqueda == "A" || pacienteBusqueda== "N" ){
         if (pacienteBusqueda == "A"){
@@ -93,7 +132,7 @@ const tomarTurno = () => {
             let horaNueva = prompt("Ingrese el horario del turno : ")
             pacienteTurnoNuevo[0].hora = horaNueva;
             alert("Turno agregado con exito");
-            menu();
+
         }else if(pacienteBusqueda == "N"){
             agregarPaciente();
         }
@@ -104,20 +143,29 @@ const tomarTurno = () => {
      
 }
 
-const buscarPaciente = () => {
-    let pacienteBuscado = parseInt(prompt("Ingrese el dni del paciente a buscar : "));
+let tomarTurnoExistente= document.getElementById("formulario__tomar__turno__existente");
+tomarTurnoExistente.addEventListener("submit", tomarTurno);
+
+const buscarPaciente = (e) => {
+    e.preventDefault();
+    let formPacienteBusqueda = e.target;
+    let pacienteBuscado = formPacienteBusqueda.children[1].value;
+    console.log(pacienteBuscado)
     let resultadoPaciente = listadePacientes.some(Paciente => Paciente.dni == pacienteBuscado);
     if (resultadoPaciente == true){
         let muestraPaciente = listadePacientes.filter(Paciente => Paciente.dni == pacienteBuscado);
         console.log(muestraPaciente);
         alert(`Paciente : ${muestraPaciente[0].nombreCompleto}- Dni : ${muestraPaciente[0].dni}- Fecha de nacimiento :${muestraPaciente[0].fechaNacimiento}- Email : ${muestraPaciente[0].mail}- Especialidad : ${muestraPaciente[0].tipoTurno}- Profesional : ${muestraPaciente[0].profesional}- Hora : ${muestraPaciente[0].hora}`)
         alert("Se muestra paciente en consola")
-        menu();
+
     }else{
         alert("El paciente no esta en la base de datos, vuelva a intentarlo");
         buscarPaciente();
     }
 }
+
+let busquedaPaciente = document.getElementById("formulario__busqueda__paciente");
+busquedaPaciente.addEventListener("submit", buscarPaciente);
 
 const cancelarTurno = () => {
     let dniPacienteACancelar = prompt("Ingrese el dni del paciente a cancelar turno : ")
@@ -129,11 +177,10 @@ const cancelarTurno = () => {
     alert("Su turno se cancelo con exito")
     alert(pacienteACancelar[0].tipoTurno)
     console.log(pacienteACancelar[0].tipoTurno);
-    menu();
 }
 
 
-
+/*
 function menu(){
     let opcionMenu = prompt("Ingrese la opcion que desea a continuacion : Ingresar paciente (I) Retirar paciente(R) Ver pacientes (V) Salir(S) Buscar Paciente (B) Tomar un turno (T) Cancelar turno(C)");
     opcionMenu = opcionMenu.toUpperCase();
@@ -160,3 +207,4 @@ function menu(){
 }
     
 menu();
+*/

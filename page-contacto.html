@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/aa431ce548.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/aa431ce548.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Central de turnos</title>
+</head>
+<body>
+    <header>
+        <div class="header__logo"><img class="header__logo__imagen"src="./assets/logo2.jpeg" alt=""></div>
+        <nav>
+            <ul>
+                <li><a href="index2.html">HOME</a></li>
+                <li><a href="index2.html">HISTORIA</a></li>
+                <li><a href="index2.html">CONSULTORIOS MEDICOS</a></li>
+                <li><a href="index2.html">SEDES</a></li>
+                <li><a href="central-turnos.html">CENTRAL DE TURNOS</a></li>
+                <li><a href="index2.html">CONTACTO</a></li>
+            </ul>
+        </nav>
+        <div class="header__logo__cmu"><img src="./assets/logocmu2.jpg" alt=""></div>
+    </header>
+    <main>
+        <section class="main__section__banner">
+            <h1>Centro Medico Urquiza</h1>
+        </section>
+
+        <h2>GESTION DE TURNOS ONLINE</h2>
+        <section class="section__conteiner__form">
+            <h1 class="section_conteiner_titulo">AGREGAR PACIENTE </h1>
+            
+            <form method="get" id="formulario__ingresar__paciente" class="container__form">     
+
+                <label for="nombre">Ingrese el nombre del paciente : </label>
+                <input type="text" name="" id="nombre" placeholder="">
+
+
+                <label for="dni">Indique el dni del paciente : </label>
+                <input type="text" name="" id="dni" placeholder="(sin puntos ni espacios)">
+
+
+                <label for="fecha-nacimiento">Indique la fecha de nacimiento del paciente :  </label>
+                <input type="date" name="" id="fecha-nacimiento" placeholder=" Ej : (5/5/1997)">
+
+
+
+                <label for="mail">Indique el mail del paciente :  : </label>
+                <input type="email" name="" id="mail">
+
+                <label for="especialidad">Indique la especialidad para la que desea el turno :  </label>
+                <input type="text" name="" id="especialidad">
+
+                <label for="profesional">Indique el profesional con el que desea el turno :  </label>
+                <input type="text" name="" id="profesional">
+
+                <label for="hora">Ingrese el horario en el que desea el turno  :  </label>
+                <input type="datetime" name="" id="hora">
+
+                <input type="submit" value="Ingresar Paciente">
+                
+                <input type="reset" value="Vaciar Formulario">
+            </form>
+            <h3>BUSCAR PACIENTE </h3>
+            <form method="get" id="formulario__busqueda__paciente" class="container__form">     
+                <label for="dni-busqueda">Indique el dni del paciente : </label>
+                <input type="text" name="" id="dni-busqueda" placeholder="(sin puntos ni espacios)">
+
+                <input type="submit" value="Buscar Paciente">
+
+                <input type="reset" value="Vaciar Formulario">
+
+            </form>
+            <h4>RETIRAR PACIENTE</h4>
+            <form method="get" id="formulario__retiro__paciente" class="container__form">     
+                <label for="dni-busqueda">Indique el dni del paciente : </label>
+                <input type="text" name="" id="dni-busqueda" placeholder="(sin puntos ni espacios)">
+
+                <input type="submit" value="Retirar Paciente">
+
+                <input type="reset" value="Vaciar Formulario">
+
+            </form>
+            
+
+            <div class="conteiner__mapa"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26282.19462214232!2d-58.50625637943461!3d-34.571924612454566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb65c360890c1%3A0x8bd20bac2f970066!2sVilla%20Urquiza%2C%20CABA!5e0!3m2!1ses-419!2sar!4v1662508071125!5m2!1ses-419!2sar" width="600" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    
+        </section>
+
+        <script src="main2.js"></script>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>
