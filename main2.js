@@ -94,9 +94,11 @@ const retirarPaciente = (e) =>{
     console.log("IMPRIMIMOS EL ARRAY SIN EL DATO")
     console.log(arrayNuevo);
     listadePacientes = arrayNuevo;
+    
     listadePacientesJson = JSON.stringify(listadePacientes)
+    localStorage.setItem("Lista de pacientes", listadePacientesJson)
     console.log(listadePacientes)
-    return listadePacientesJson;
+    return listadePacientes;
 
 }
 
@@ -142,10 +144,10 @@ const tomarTurno = (e) => {
     }
      
 }
-
+/*
 let tomarTurnoExistente= document.getElementById("formulario__tomar__turno__existente");
 tomarTurnoExistente.addEventListener("submit", tomarTurno);
-
+*/
 const buscarPaciente = (e) => {
     e.preventDefault();
     let formPacienteBusqueda = e.target;
