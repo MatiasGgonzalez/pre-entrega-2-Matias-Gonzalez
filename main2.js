@@ -104,7 +104,7 @@ const retirarPaciente = (e) =>{
 
 let retiroPaciente = document.getElementById("formulario__retiro__paciente");
 retiroPaciente.addEventListener("submit", retirarPaciente);
-
+/*
 const verPacientes = () => {
     alert("Se muestran pacientes en consola")
     console.log(listadePacientes)
@@ -112,8 +112,9 @@ const verPacientes = () => {
         console.log(pacienteIterado) 
     }
 }
+*/
 
-
+/*
 const tomarTurno = (e) => {
     e.preventDefault();
     let tomarturnoNuevo = e.target;
@@ -144,6 +145,7 @@ const tomarTurno = (e) => {
     }
      
 }
+*/
 /*
 let tomarTurnoExistente= document.getElementById("formulario__tomar__turno__existente");
 tomarTurnoExistente.addEventListener("submit", tomarTurno);
@@ -169,17 +171,25 @@ const buscarPaciente = (e) => {
 let busquedaPaciente = document.getElementById("formulario__busqueda__paciente");
 busquedaPaciente.addEventListener("submit", buscarPaciente);
 
-const cancelarTurno = () => {
-    let dniPacienteACancelar = prompt("Ingrese el dni del paciente a cancelar turno : ")
-    let pacienteACancelar = listadePacientes.filter(Paciente => Paciente.dni == dniPacienteACancelar);
+const cancelarTurno = (e) => {
+    e.preventDefault();
+    let pacienteACancelar = e.target;
+    let dniPacienteACancelar = pacienteACancelar.children[1].value;
+    pacienteACancelar = listadePacientes.filter(Paciente => Paciente.dni == dniPacienteACancelar);
     alert(`El paciente ${pacienteACancelar[0].nombreCompleto} tiene turno  en ${pacienteACancelar[0].tipoTurno} con el profesional ${pacienteACancelar[0].profesional}`)
     pacienteACancelar[0].tipoTurno = "";
     pacienteACancelar[0].profesional = "";
     pacienteACancelar[0].hora = "";
-    alert("Su turno se cancelo con exito")
-    alert(pacienteACancelar[0].tipoTurno)
+    alert("Su turno se cancelo con exito");
     console.log(pacienteACancelar[0].tipoTurno);
+    console.log(pacienteACancelar);
+    console.log(listadePacientes)
+    listadePacientesJson = JSON.stringify(listadePacientes)
+    localStorage.setItem("Lista de pacientes", listadePacientesJson)
 }
+
+let cancelarTurnoPaciente = document.getElementById("formulario__cancelacion__turno");
+cancelarTurnoPaciente.addEventListener("submit", cancelarTurno);
 
 
 /*
