@@ -74,6 +74,10 @@
                 <input type="reset" value="Vaciar Formulario">
 
             </form>
+            <div id="contenedor__tabla__paciente">
+
+            </div>
+
             <h4>RETIRAR PACIENTE</h4>
             <form method="get" id="formulario__retiro__paciente" class="container__form">     
                 <label for="dni-busqueda">Indique el dni del paciente : </label>
@@ -96,15 +100,25 @@
 
             </form>
             
-
-            <div class="conteiner__mapa"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26282.19462214232!2d-58.50625637943461!3d-34.571924612454566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb65c360890c1%3A0x8bd20bac2f970066!2sVilla%20Urquiza%2C%20CABA!5e0!3m2!1ses-419!2sar!4v1662508071125!5m2!1ses-419!2sar" width="600" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-    
         </section>
 
-        <script src="main2.js"></script>
+        <section class="contenedor__covid">
+            <div class="contenedor__img">
+                <img src="./assets/info-imporante-02.png" alt="">
+            </div>
+            <div class="contenedor__boton__covid">
+                <button class ="boton-covid"id="btn-covid">PULSE AQUI PARA + INFO.</button>
+            </div>
+            <div id="contenedor__datos__covid"></div>
+        </section>
+
+        <div class="conteiner__mapa"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26282.19462214232!2d-58.50625637943461!3d-34.571924612454566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb65c360890c1%3A0x8bd20bac2f970066!2sVilla%20Urquiza%2C%20CABA!5e0!3m2!1ses-419!2sar!4v1662508071125!5m2!1ses-419!2sar" width="600" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
     </main>
     <footer>
 
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="main2.js"></script>
 </body>
 </html>
+

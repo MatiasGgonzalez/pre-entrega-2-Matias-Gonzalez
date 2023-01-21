@@ -35,49 +35,57 @@ let listadePacientesJson = [];
 console.log(listadePacientesJson);
 
 const agregarPaciente = (e) =>{
-    let cantidadPacientes = 0;
-    cantidadPacientes = cantidadPacientes + 1;
-    e.preventDefault();
-
-    let formulario = e.target;
-    let nombreCompleto = formulario.children[1].value;
-    localStorage.setItem(`nombreCompleto`,nombreCompleto);
-    console.log(nombreCompleto);
-    let dni= formulario.children[3].value;
-    localStorage.setItem(`dni`, dni);
-    console.log(dni);
-
-    let fechaNacimiento = formulario.children[5].value;
-    localStorage.setItem(`fechaNacimiento`, fechaNacimiento);
-    console.log(fechaNacimiento);
-    let mail = formulario.children[7].value;
-    localStorage.setItem(`fmail`, mail);
-    console.log(mail);
-    let tipoTurno = formulario.children[9].value;
-    localStorage.setItem(`tipoTurno`, tipoTurno);
+        let cantidadPacientes = 0;
+        cantidadPacientes = cantidadPacientes + 1;
+        e.preventDefault();
     
-    console.log(tipoTurno);
-    let profesional = formulario.children[11].value;
-    localStorage.setItem(`profesional`, profesional);
-    console.log(profesional);
-    let hora = formulario.children[13].value;
-    localStorage.setItem(`hora`, hora);
-    console.log(hora);
-    let tiempoEspera = 5;
-    tiempoEspera =  cantidadPacientes * tiempoEspera;
-    let pacienteNuevo = new Paciente(nombreCompleto,dni,fechaNacimiento,mail,tipoTurno,profesional,hora,tiempoEspera,cantidadPacientes);
-    listadePacientes.push(pacienteNuevo);
-    console.log(listadePacientes);
-    alert("Paciente Agregado con exito.")
-    listadePacientesJson = JSON.stringify(listadePacientes)
-    console.log("MUESTRA EN CONSOLA DE ARRAY DE OBJETO CON JSON")
-    console.log(listadePacientesJson)
-    localStorage.setItem("Lista de pacientes", listadePacientesJson);
-    return listadePacientesJson;
+        let formulario = e.target;
+        let nombreCompleto = formulario.children[1].value;
+        localStorage.setItem(`nombreCompleto`,nombreCompleto);
+        console.log(nombreCompleto);
+        let dni= formulario.children[3].value;
+        localStorage.setItem(`dni`, dni);
+        console.log(dni);
+    
+        let fechaNacimiento = formulario.children[5].value;
+        localStorage.setItem(`fechaNacimiento`, fechaNacimiento);
+        console.log(fechaNacimiento);
+        let mail = formulario.children[7].value;
+        localStorage.setItem(`gmail`, mail);
+        console.log(mail);
+        let tipoTurno = formulario.children[9].value;
+        localStorage.setItem(`tipoTurno`, tipoTurno);
+        
+        console.log(tipoTurno);
+        let profesional = formulario.children[11].value;
+        localStorage.setItem(`profesional`, profesional);
+        console.log(profesional);
+        let hora = formulario.children[13].value;
+        localStorage.setItem(`hora`, hora);
+        console.log(hora);
+        let tiempoEspera = 5;
+        tiempoEspera =  cantidadPacientes * tiempoEspera;
+        let pacienteNuevo = new Paciente(nombreCompleto,dni,fechaNacimiento,mail,tipoTurno,profesional,hora,tiempoEspera,cantidadPacientes);
+        listadePacientes.push(pacienteNuevo);
+        console.log(listadePacientes);
+        Swal.fire({
+            title: `Correcto`,
+            text: `Paciente agregado con exito`,
+            icon: `success`,
+            confirmButtonText: `Ok`,
+            width: 300,
+            height: 300
+        })
+        listadePacientesJson = JSON.stringify(listadePacientes)
+        console.log("MUESTRA EN CONSOLA DE ARRAY DE OBJETO CON JSON")
+        console.log(listadePacientesJson)
+        localStorage.setItem("Lista de pacientes", listadePacientesJson);
+        return listadePacientesJson;
 }
 
 let miFormulario = document.getElementById("formulario__ingresar__paciente");
 miFormulario.addEventListener("submit", agregarPaciente);
+
 
 
 
@@ -138,6 +146,7 @@ const tomarTurno = (e) => {
 
         }else if(pacienteBusqueda == "N"){
             agregarPaciente();
+            
         }
     }else{
         alert("Ingreso un dato incorrecto, intente nuevamente");
@@ -150,6 +159,7 @@ const tomarTurno = (e) => {
 let tomarTurnoExistente= document.getElementById("formulario__tomar__turno__existente");
 tomarTurnoExistente.addEventListener("submit", tomarTurno);
 */
+const buscarpacienteContenedor = document.querySelector("#contenedor__tabla__paciente");
 const buscarPaciente = (e) => {
     e.preventDefault();
     let formPacienteBusqueda = e.target;
@@ -159,9 +169,30 @@ const buscarPaciente = (e) => {
     if (resultadoPaciente == true){
         let muestraPaciente = listadePacientes.filter(Paciente => Paciente.dni == pacienteBuscado);
         console.log(muestraPaciente);
-        alert(`Paciente : ${muestraPaciente[0].nombreCompleto}- Dni : ${muestraPaciente[0].dni}- Fecha de nacimiento :${muestraPaciente[0].fechaNacimiento}- Email : ${muestraPaciente[0].mail}- Especialidad : ${muestraPaciente[0].tipoTurno}- Profesional : ${muestraPaciente[0].profesional}- Hora : ${muestraPaciente[0].hora}`)
-        alert("Se muestra paciente en consola")
+        buscarpacienteContenedor.innerHTML = `
+        <table class="container-tabla">
+            <tr>
+                <th>Nombre Completo</th>
+                <th>Dni</th>
+                <th>Fecha de nacimiento</th>
+                <th>Email</th>
+                <th>Especialidad</th>
+                <th>Profesional</th>
+                <th>Horario</th>
 
+            </tr>
+            <tr>
+                <td class="items-tabla" id="item-tabla-nombre">${muestraPaciente[0].nombreCompleto}</td>
+                <td class="items-tabla" id="item-tabla-dni">${muestraPaciente[0].dni}</td>
+                <td class="items-tabla" id="item-tabla-fecha-nacimiento">${muestraPaciente[0].fechaNacimiento}</td>
+                <td class="items-tabla" id="item-tabla-mail">${muestraPaciente[0].mail}</td>
+                <td class="items-tabla" id="item-tabla-especialidad">${muestraPaciente[0].tipoTurno}</td>
+                <td class="items-tabla" id="item-tabla-profesional">${muestraPaciente[0].profesional}</td>
+                <td class="items-tabla" id="item-tabla-hora">${muestraPaciente[0].hora}</td>
+            </tr>
+
+        </table>
+        `
     }else{
         alert("El paciente no esta en la base de datos, vuelva a intentarlo");
         buscarPaciente();
@@ -191,6 +222,46 @@ const cancelarTurno = (e) => {
 let cancelarTurnoPaciente = document.getElementById("formulario__cancelacion__turno");
 cancelarTurnoPaciente.addEventListener("submit", cancelarTurno);
 
+const boton = document.getElementById("btn-covid");
+const contenedor = document.querySelector("#contenedor__datos__covid");
+
+const obtenerDatos = () => {
+    fetch("https://disease.sh/v3/covid-19/countries/argentina?strict=true")
+    .then(response => response.json())
+    .then(resp => resp)
+    .then(resp => {
+        console.log(resp)
+        contenedor.innerHTML  = `
+        <div class="contenedor__info__covid">
+            <h3 class = "titulo__info__covid">INFORMACION ACTUALIZADA COVID-19 ARGENTINA</h3>
+            <ul class="lista__info__covid">
+                <li>Activos : ${resp.active}</li>
+                <li>Casos activos por millon de personas : ${resp.activePerOneMillion}</li>
+                <li>Casos totales : ${resp.cases}</li>
+                <li>Casos por millon de personas : ${resp.casesPerOneMillion}</li>
+                <li>Casos criticos : ${resp.critical}</li>
+                <li>Criticos por millon de personas : ${resp.criticalPerOneMillion}</li>
+                <li>Fallecimietos totales : ${resp.deaths}</li>
+                <li>Fallecimientos por millon de personas :${resp.deathsPerOneMillion}</li>
+                <li>Poblacion : ${resp.population}</li>
+                <li>Recuperados : ${resp.recovered}</li>
+                <li>Recuperados por millon de personas : ${resp.recoveredPerOneMillion}</li>
+                <li>Personas testeadas : ${resp.tests}</li>
+                <li>Testeados por millon de personas : ${resp.testsPerOneMillion}</li>
+                <li>Casos en el dia de hoy : ${resp.todayCases}</li>
+                <li>Muertes en el dia de hoy : ${resp.todayDeaths}</li>
+                <li>Recuperados en dia de hoy : ${resp.todayRecovered}</li>
+            </ul>
+        </div>
+    `
+    })
+    
+}
+
+
+boton.onclick = () => {
+    obtenerDatos();
+}
 
 /*
 function menu(){

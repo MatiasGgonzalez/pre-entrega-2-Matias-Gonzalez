@@ -63,6 +63,18 @@ main{
     font-size: 20px;
 }
 
+.container-tabla{
+    width: 80%;
+    margin: auto;
+}
+
+.container-tabla .tr .td{
+    margin: 10px;
+}
+
+h4{
+    margin-top: 20px;
+}
 main .main__section__banner{
     height: 500px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./assets/banner-home.jpeg");   
@@ -169,6 +181,68 @@ main .equipamiento .equipamiento__contenedor__grid .equipamiento__contenedor__gr
 main .equipamiento .equipamiento__contenedor__grid .equipamiento__contenedor__grid__contenido__item p{
     margin-top: 10px;
     font-size: 15px;
+}
+
+main .contenedor__covid{
+
+    width: 60%;
+    margin: auto;
+}
+
+main .contenedor__covid .contenedor__img{
+    padding-top: 30px;
+}
+
+main .contenedor__covid .contenedor__img img{
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+
+}
+
+main .contenedor__covid .contenedor__boton__covid .boton-covid{
+    background: #3D94F6;
+    background-image: -webkit-linear-gradient(top, #3D94F6, #1E62D0);
+    background-image: -moz-linear-gradient(top, #3D94F6, #1E62D0);
+    background-image: -ms-linear-gradient(top, #3D94F6, #1E62D0);
+    background-image: -o-linear-gradient(top, #3D94F6, #1E62D0);
+    background-image: -webkit-gradient(to bottom, #3D94F6, #1E62D0);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 100;
+
+    -webkit-box-shadow: 1px 1px 20px 0 #000000;
+    -moz-box-shadow: 1px 1px 20px 0 #000000;
+    box-shadow: 1px 1px 20px 0 #000000;
+    text-shadow: 1px 1px 20px #000000;
+    border: solid #337FED 1px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    width: 300px;
+    height: 50px;
+    margin-top: 10px;
+}
+
+.contenedor__info__covid{
+    margin-top: 30px;
+}
+.titulo__info__covid{
+    font-size: 25px;
+}
+
+.lista__info__covid{
+    margin-top: 25px;
+}
+
+.contenedor__info__covid .lista__info__covid li{
+    font-size: 20px;
+    margin: 15px;
+    list-style: none;
 }
 
 iframe{
