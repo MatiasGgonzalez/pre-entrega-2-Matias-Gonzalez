@@ -73,8 +73,7 @@ const agregarPaciente = (e) =>{
             text: `Paciente agregado con exito`,
             icon: `success`,
             confirmButtonText: `Ok`,
-            width: 300,
-            height: 300
+            width: 300
         })
         listadePacientesJson = JSON.stringify(listadePacientes)
         console.log("MUESTRA EN CONSOLA DE ARRAY DE OBJETO CON JSON")
@@ -98,7 +97,13 @@ const retirarPaciente = (e) =>{
     console.log("Paciente a retirar : ")
     console.log(pacienteRetiro)
     let arrayNuevo = listadePacientes.filter(Paciente => Paciente.dni != pacienteRetiro);
-    alert("Paciente retirado con exito")
+    Swal.fire({
+        title: `Correcto`,
+        text: `Paciente  con exito`,
+        icon: `success`,
+        confirmButtonText: `Ok`,
+        width: 300
+    })
     console.log("IMPRIMIMOS EL ARRAY SIN EL DATO")
     console.log(arrayNuevo);
     listadePacientes = arrayNuevo;

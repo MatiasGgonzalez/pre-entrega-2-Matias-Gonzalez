@@ -184,9 +184,10 @@ main .equipamiento .equipamiento__contenedor__grid .equipamiento__contenedor__gr
 }
 
 main .contenedor__covid{
-
     width: 60%;
     margin: auto;
+    border: 3px  rgb(117, 189, 236) solid;
+    border-radius: 3px;
 }
 
 main .contenedor__covid .contenedor__img{
@@ -250,5 +251,5 @@ iframe{
 }
 footer{
     height: 20vh;
-
+    text-align: center;
 }
