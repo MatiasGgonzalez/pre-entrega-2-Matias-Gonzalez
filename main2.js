@@ -212,11 +212,16 @@ const cancelarTurno = (e) => {
     let pacienteACancelar = e.target;
     let dniPacienteACancelar = pacienteACancelar.children[1].value;
     pacienteACancelar = listadePacientes.filter(Paciente => Paciente.dni == dniPacienteACancelar);
-    alert(`El paciente ${pacienteACancelar[0].nombreCompleto} tiene turno  en ${pacienteACancelar[0].tipoTurno} con el profesional ${pacienteACancelar[0].profesional}`)
     pacienteACancelar[0].tipoTurno = "";
     pacienteACancelar[0].profesional = "";
     pacienteACancelar[0].hora = "";
-    alert("Su turno se cancelo con exito");
+    Swal.fire({
+        title: `Correcto`,
+        text: `Turno cancelado con exito`,
+        icon: `success`,
+        confirmButtonText: `Ok`,
+        width: 300
+    })
     console.log(pacienteACancelar[0].tipoTurno);
     console.log(pacienteACancelar);
     console.log(listadePacientes)
